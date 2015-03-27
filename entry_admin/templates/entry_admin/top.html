@@ -1,0 +1,10 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}
+アドミン画面-タイトル
+{% endblock %}
+
+{% block body %}
+エントリーのアドミンサイトのトップ画面
+<a href="{% url 'accounts_logout' %}">ログアウト</a>
+{% endblock %}

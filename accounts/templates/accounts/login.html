@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}
+ログイン画面-タイトル
+{% endblock %}
+
+{% block body %}
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit" class="button" value="Login" />
+</form>
+{% endblock %}
