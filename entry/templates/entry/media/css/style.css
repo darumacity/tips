@@ -1,0 +1,27 @@
+body {
+    background-color: #f9f9f9;
+}
+
+header {
+    height: 152px;		
+}
+
+#wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+#content {
+    float: left;
+    width: 68%;
+}
+
+aside {
+    float: right;
+    margin-left: 5.7%;
+    width: 26.3%;
+}
+
+footer {
+    clear: both;
+}
