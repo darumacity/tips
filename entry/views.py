@@ -5,6 +5,13 @@ from entry.models import Entry
 
 # Create your views here.
 
+def media(request, media_path):
+    from django.views.static import serve
+    from os import path
+
+    media_root = path.join(path.abspath(path.dirname(__file__)), 'templates/entry/media')
+    return serve(request, media_path, media_root)
+
 def top(request):
     entries = Entry.objects.all()
     return render_to_response('entry/top.html', {'entries': entries})
