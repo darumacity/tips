@@ -1,0 +1,27 @@
+{% extends "entry/base.html" %}
+
+{% block body %}
+
+<h2>{{ archive_title }}</h2>
+
+{% for entry in entries %}
+<div>
+  <a href='{% url "entry:content" entry_id=entry.id %}'>{{ entry.title }}</a>
+  <ul>
+    <li>
+        {{ entry.post_user }}
+    </li>
+    <li>
+        {{ entry.post_date_time }}
+    </li>
+    <li>
+      {% for tag in entry.tags.all %}
+      {{ tag }}
+      {% if not forloop.last %} , {% endif %}
+      {% endfor %}
+    </li>
+  </ul>
+</div>
+{% endfor %}
+
+{% endblock %}

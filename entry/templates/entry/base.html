@@ -34,6 +34,17 @@
           </ul>
         </section>
         
+        <section>
+          <h3>Tags</h3>
+          <ul>
+            {% for tag in tags %}
+            <li>
+              <a href='{% url "entry:tag" tag_id=tag.id %}'>{{ tag.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        
       </aside>
       
       <footer>
