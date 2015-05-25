@@ -21,3 +21,6 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-post_date_time']

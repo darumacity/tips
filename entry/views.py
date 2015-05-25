@@ -16,12 +16,12 @@ def top(request):
     return render_to_response('entry/archive.html',
                               {'archive_title': "最近の記事",
                                'entries': Entry.objects.all(),
-                               'recent_entries': Entry.objects.all(),
+                               'recent_entries': Entry.objects.all()[:5],
                                'tags': Tag.objects.all()})
 
 def content(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
-    return render_to_response(entry.path, {'recent_entries': Entry.objects.all(),
+    return render_to_response(entry.path, {'recent_entries': Entry.objects.all()[:5],
                                            'tags': Tag.objects.all()})
 
 def resource(request, entry_id, resource_path):
@@ -36,5 +36,5 @@ def tag(request, tag_id):
     return render_to_response('entry/archive.html',
                               {'archive_title': tag.name,
                                'entries': Entry.objects.filter(tags__id=tag_id),
-                               'recent_entries': Entry.objects.all(),
+                               'recent_entries': Entry.objects.all()[:5],
                                'tags': Tag.objects.all()})
