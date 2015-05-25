@@ -13,12 +13,13 @@ def media(request, media_path):
     return serve(request, media_path, media_root)
 
 def top(request):
-    entries = Entry.objects.all()
-    return render_to_response('entry/top.html', {'entries': entries})
+    return render_to_response('entry/top.html',
+                              {'entries': Entry.objects.all(),
+                               'recent_entries': Entry.objects.all()})
 
 def content(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
-    return render_to_response(entry.path)
+    return render_to_response(entry.path, {'recent_entries': Entry.objects.all()})
 
 def resource(request, entry_id, resource_path):
     from django.views.static import serve
