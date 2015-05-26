@@ -26,7 +26,7 @@
         <section>
           <h3>Recent Entries</h3>
           <ul>
-            {% for entry in recent_entries %}
+            {% for entry in sidebar_info.recent_entries %}
             <li>
               <a href='{% url "entry:content" entry_id=entry.id %}'>{{ entry.title }}</a>
             </li>
@@ -37,7 +37,7 @@
         <section>
           <h3>Tags</h3>
           <ul>
-            {% for tag in tags %}
+            {% for tag in sidebar_info.tags %}
             <li>
               <a href='{% url "entry:tag" tag_id=tag.id %}'>{{ tag.name }}</a>
             </li>

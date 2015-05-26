@@ -16,13 +16,11 @@ def top(request):
     return render_to_response('entry/archive.html',
                               {'archive_title': "最近の記事",
                                'entries': Entry.objects.all(),
-                               'recent_entries': Entry.objects.all()[:5],
-                               'tags': Tag.objects.all()})
+                               'sidebar_info': SidebarInfo})
 
 def content(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
-    return render_to_response(entry.path, {'recent_entries': Entry.objects.all()[:5],
-                                           'tags': Tag.objects.all()})
+    return render_to_response(entry.path, {'sidebar_info': SidebarInfo})
 
 def resource(request, entry_id, resource_path):
     from django.views.static import serve
@@ -36,5 +34,10 @@ def tag(request, tag_id):
     return render_to_response('entry/archive.html',
                               {'archive_title': tag.name,
                                'entries': Entry.objects.filter(tags__id=tag_id),
-                               'recent_entries': Entry.objects.all()[:5],
-                               'tags': Tag.objects.all()})
+                               'sidebar_info': SidebarInfo})
+
+class SidebarInfo:
+    
+    def __init__(self):
+        self.recent_entries = Entry.objects.all()[:5]
+        self.tags = Tag.objects.all()
