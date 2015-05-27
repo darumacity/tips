@@ -26,9 +26,9 @@ def resource(request, entry_id, resource_path):
     return serve(request, resource_path, path.dirname(entry.path))
 
 def tag(request, tag_id):
-    tag = Tag.objects.get(id=tag_id)
+    tag_name = Tag.objects.get(id=tag_id).name
     return render_to_response('entry/archive.html',
-                              {'archive_info': ArchiveInfo(tag.name,
+                              {'archive_info': ArchiveInfo(u'「%s」の記事' % tag_name,
                                                            Entry.objects.filter(tags__id=tag_id)),
                                'sidebar_info': SidebarInfo})
 
