@@ -14,8 +14,8 @@ def media(request, media_path):
 
 def top(request):
     return render_to_response('entry/archive.html',
-                              {'archive_title': "最近の記事",
-                               'entries': Entry.objects.all(),
+                              {'archive_info': ArchiveInfo("最近の記事",
+                                                           Entry.objects.all()),
                                'sidebar_info': SidebarInfo})
 
 def content(request, entry_id):
@@ -32,8 +32,8 @@ def resource(request, entry_id, resource_path):
 def tag(request, tag_id):
     tag = Tag.objects.get(id=tag_id)
     return render_to_response('entry/archive.html',
-                              {'archive_title': tag.name,
-                               'entries': Entry.objects.filter(tags__id=tag_id),
+                              {'archive_info': ArchiveInfo(tag.name,
+                                                           Entry.objects.filter(tags__id=tag_id)),
                                'sidebar_info': SidebarInfo})
 
 class SidebarInfo:
@@ -41,3 +41,9 @@ class SidebarInfo:
     def __init__(self):
         self.recent_entries = Entry.objects.all()[:5]
         self.tags = Tag.objects.all()
+
+class ArchiveInfo:
+
+    def __init__(self, title, query):
+        self.title = title
+        self.entries = query

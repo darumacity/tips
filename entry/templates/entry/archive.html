@@ -2,9 +2,9 @@
 
 {% block body %}
 
-<h2>{{ archive_title }}</h2>
+<h2>{{ archive_info.title }}</h2>
 
-{% for entry in entries %}
+{% for entry in archive_info.entries %}
 <div>
   <a href='{% url "entry:content" entry_id=entry.id %}'>{{ entry.title }}</a>
   <ul>
