@@ -12,7 +12,7 @@ def media(request, media_path):
     return serve(request, media_path, media_root)
 
 def top(request):
-    return render_to_response('entry/archive.html',
+    return render_to_response('entry/archive.djhtml',
                               {'archive_info': ArchiveInfo("最近の記事",
                                                            Entry.objects.all()),
                                'sidebar_info': SidebarInfo})
@@ -27,7 +27,7 @@ def resource(request, entry_id, resource_path):
 
 def tag(request, tag_id):
     tag_name = Tag.objects.get(id=tag_id).name
-    return render_to_response('entry/archive.html',
+    return render_to_response('entry/archive.djhtml',
                               {'archive_info': ArchiveInfo(u'「%s」の記事' % tag_name,
                                                            Entry.objects.filter(tags__id=tag_id)),
                                'sidebar_info': SidebarInfo})

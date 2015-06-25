@@ -6,4 +6,4 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def top(request):
-    return render(request, 'entry_admin/top.html')
+    return render(request, 'entry_admin/top.djhtml')

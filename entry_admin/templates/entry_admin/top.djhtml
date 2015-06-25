@@ -1,4 +1,4 @@
-{% extends "accounts/base.html" %}
+{% extends "accounts/base.djhtml" %}
 
 {% block title %}
 アドミン画面-タイトル
