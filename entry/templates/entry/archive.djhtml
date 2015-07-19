@@ -2,26 +2,28 @@
 
 {% block body %}
 
-  <h2>{{ archive_info.title }}</h2>
+  <div id="archive">
+    
+    <h2>{{ archive_info.title }}</h2>
 
-  {% for entry in archive_info.entries %}
-    <div background='black'>
-      <a href='{% url "entry:content" entry_id=entry.id %}'>{{ entry.title }}</a>
-      <ul>
-        <li>
-          {{ entry.post_user }}
-        </li>
-        <li>
-          {{ entry.post_date_time }}
-        </li>
-        <li>
+    {% for entry in archive_info.entries %}
+      <article>
+        <h3>
+          <a href='{% url "entry:content" entry_id=entry.id %}'>{{ entry.title }}</a>
+        </h3>
+        <p id="entry-meta">
+          投稿日:
+          <span class="date">{{ entry.post_date_time|date:"Y/m/d" }}</span>
+          &nbsp;
+          tag:
           {% for tag in entry.tags.all %}
-            {{ tag }}
+            <a href='{% url "entry:tag" tag_id=tag.id %}'>{{ tag.name }}</a>
             {% if not forloop.last %} , {% endif %}
           {% endfor %}
-        </li>
-      </ul>
-    </div>
-  {% endfor %}
+        </p>
+      </article>
+    {% endfor %}
+
+  </div>
 
 {% endblock %}
