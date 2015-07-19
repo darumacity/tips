@@ -19,6 +19,18 @@
     </header>
     
     <div id="container">
+
+      <h2>{{ title }}</h2>
+      {% if entry %}
+        <p class="entry-meta">
+          投稿日:<span class="date">{{ entry.post_date_time|date:"Y/m/d" }}</span>
+          &nbsp;tag:
+          {% for tag in entry.tags.all %}
+            <a href='{% url "entry:tag" tag_id=tag.id %}'>{{ tag.name }}</a>
+            {% if not forloop.last %} , {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
       
       <section id="content">
         {% block body %}{% endblock %}

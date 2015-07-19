@@ -13,13 +13,16 @@ def media(request, media_path):
 
 def top(request):
     return render_to_response('entry/archive.djhtml',
-                              {'archive_info': ArchiveInfo("最近の記事",
-                                                           Entry.objects.all()),
+                              {'title': "最近の記事",
+                               'entries': Entry.objects.all(),
                                'sidebar_info': SidebarInfo})
 
 def content(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
-    return render_to_response(entry.path, {'sidebar_info': SidebarInfo})
+    return render_to_response(entry.path,
+                              {'title': entry.title,
+                               'entry': entry,
+                               'sidebar_info': SidebarInfo})
 
 def resource(request, entry_id, resource_path):
     entry = Entry.objects.get(id=entry_id)
@@ -28,8 +31,8 @@ def resource(request, entry_id, resource_path):
 def tag(request, tag_id):
     tag_name = Tag.objects.get(id=tag_id).name
     return render_to_response('entry/archive.djhtml',
-                              {'archive_info': ArchiveInfo(u'「%s」の記事' % tag_name,
-                                                           Entry.objects.filter(tags__id=tag_id)),
+                              {'title': u'「%s」の記事' % tag_name,
+                               'entries': Entry.objects.filter(tags__id=tag_id),
                                'sidebar_info': SidebarInfo})
 
 class SidebarInfo:
@@ -37,9 +40,3 @@ class SidebarInfo:
     def __init__(self):
         self.recent_entries = Entry.objects.all()[:5]
         self.tags = Tag.objects.all()
-
-class ArchiveInfo:
-
-    def __init__(self, title, query):
-        self.title = title
-        self.entries = query
